@@ -23,3 +23,6 @@ if (maxNum <= 0) {
   ansible.builtin.service:
     name: ssh
     state: started
+
+
+ansible-playbook -i localhost, mainplaybook.yml

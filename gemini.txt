@@ -14,3 +14,12 @@ if (maxNum <= 0) {
                 sum += i;
             }
         }
+- name: Stop the ssh service
+  ansible.builtin.service:
+    name: ssh
+    state: stopped
+
+- name: Start the ssh service
+  ansible.builtin.service:
+    name: ssh
+    state: started

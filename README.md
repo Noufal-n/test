@@ -1,30 +1,15 @@
-<dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+ansible localhost -m file -a "path=/home/user/test state=directory"
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <mainClass>javaApp.PrimeSum</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+touch simplefile.txt
+
+
+
+- name: Check if the file already exists in the destination
+  stat:
+    path: /home/user/test/simplefile.txt
+  register: file_data
+
+- name: Move simplefile.txt to the test directory
+  command: mv simplefile.txt /home/user/test/simplefile.txt
+  when: not file_data.stat.exists
